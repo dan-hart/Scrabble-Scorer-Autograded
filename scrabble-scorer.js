@@ -5,31 +5,31 @@ const readline = require('readline-sync');
 
 
 const oldPointStructure = {
-  1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
-  2: ['D', 'G'],
-  3: ['B', 'C', 'M', 'P'],
-  4: ['F', 'H', 'V', 'W', 'Y'],
-  5: ['K'],
-  8: ['J', 'X'],
-  10: ['Q', 'Z']
+   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+   2: ['D', 'G'],
+   3: ['B', 'C', 'M', 'P'],
+   4: ['F', 'H', 'V', 'W', 'Y'],
+   5: ['K'],
+   8: ['J', 'X'],
+   10: ['Q', 'Z']
 };
 
 function oldScrabbleScorer(word) {
-	word = word.toUpperCase();
-	let letterPoints = "";
- 
-	for (let i = 0; i < word.length; i++) {
- 
-	  for (const pointValue in oldPointStructure) {
- 
-		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-		 }
- 
-	  }
-	}
-	return letterPoints;
- }
+   word = word.toUpperCase();
+   let letterPoints = "";
+
+   for (let i = 0; i < word.length; i++) {
+
+      for (const pointValue in oldPointStructure) {
+
+         if (oldPointStructure[pointValue].includes(word[i])) {
+            letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+         }
+
+      }
+   }
+   return letterPoints;
+}
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
@@ -61,11 +61,11 @@ function vowelBonusScorer(word) {
    const vowels = ['a', 'e', 'i', 'o', 'u'];
 
    for (let char of word.toLowerCase()) {
-       if (vowels.includes(char)) {
-           score += 3;
-       } else {
-           score += 1;
-       }
+      if (vowels.includes(char)) {
+         score += 3;
+      } else {
+         score += 1;
+      }
    }
 
    return score;
@@ -82,7 +82,7 @@ function scrabbleScorer(word) {
    let score = 0;
 
    for (let char of word.toLowerCase()) {
-       score += newPointStructure[char];
+      score += newPointStructure[char];
    }
 
    return score;
@@ -97,13 +97,13 @@ The scoringFunction property should be a reference to the corresponding scoring 
 */
 let scoringAlgorithms = [
    {
-       scorerFunction: simpleScorer
+      scorerFunction: simpleScorer
    },
    {
-       scorerFunction: vowelBonusScorer
+      scorerFunction: vowelBonusScorer
    },
    {
-       scorerFunction: scrabbleScorer
+      scorerFunction: scrabbleScorer
    }
 ];
 
@@ -118,15 +118,15 @@ function scorerPrompt() {
    let selection = readline.question("Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter 0, 1, or 2: ");
 
    switch (selection) {
-       case '0':
-           return scoringAlgorithms[0];
-       case '1':
-           return scoringAlgorithms[1];
-       case '2':
-           return scoringAlgorithms[2];
-       default:
-           console.log("Invalid selection. Please enter 0, 1, or 2.");
-           return scorerPrompt();
+      case '0':
+         return scoringAlgorithms[0];
+      case '1':
+         return scoringAlgorithms[1];
+      case '2':
+         return scoringAlgorithms[2];
+      default:
+         console.log("Invalid selection. Please enter 0, 1, or 2.");
+         return scorerPrompt();
    }
 }
 
@@ -142,9 +142,9 @@ function transform(oldPointStructure) {
    let newPointStructure = {};
 
    for (let point in oldPointStructure) {
-       for (let letter of oldPointStructure[point]) {
-           newPointStructure[letter.toLowerCase()] = Number(point);
-       }
+      for (let letter of oldPointStructure[point]) {
+         newPointStructure[letter.toLowerCase()] = Number(point);
+      }
    }
 
    return newPointStructure;
@@ -170,6 +170,6 @@ module.exports = {
    scrabbleScorer: scrabbleScorer,
    scoringAlgorithms: scoringAlgorithms,
    newPointStructure: newPointStructure,
-	runProgram: runProgram,
-	scorerPrompt: scorerPrompt
+   runProgram: runProgram,
+   scorerPrompt: scorerPrompt
 };
